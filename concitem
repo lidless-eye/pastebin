@@ -1,0 +1,29 @@
+#!/usr/bin/perl -w
+
+use strict;
+use warnings;
+
+my ($previous_row, $date, $itemname, $sales) = ('') x 4;
+
+while (<>) {
+    chomp;
+    my @fields = split(',');
+    if ($fields[0] eq $date) {
+    print $previous_row if $previous_row;
+    print " $fields[1]:$fields[2]";
+    $previous_row = '';
+   } else {
+    $previous_row = "\n$fields[0],$fields[1]:$fields[2]";
+    $date = $fields[0];
+   }
+}
+
+
+__DATA__
+12/10/01,Call to Arms,3500
+12/10/01,Mystery Chest,5495
+12/10/01,7th City Package,2160
+12/10/01,Divine Evocation,600
+12/10/02,Squire's Hourglass,3831
+12/10/02,Knight's Hourglass,24020
+12/10/02,Guinevere's Hourglass,40910
